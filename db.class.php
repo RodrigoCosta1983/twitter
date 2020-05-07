@@ -1,5 +1,5 @@
 <?php
-
+// ----------------Conexão Com o Banco------------------------
 class db{
 
     //Qual o Host

@@ -11,6 +11,8 @@
     $objDb = new db();
     $link = $objDb->conecta_mysql();
 
+    //montar a query
+    
     $sql = "insert into usuarios(usuario, email, senha) values('$usuario','$email','$senha')";
 
     //executar a query

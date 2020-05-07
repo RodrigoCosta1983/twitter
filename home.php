@@ -63,8 +63,7 @@
                  <br>
                  <br>
                  <?= $_SESSION['email']; ?>
-                 <br>
-                 <?= md5($_SESSION['senha']); ?>
+                
 
             </div>
 			<div class="col-md-4"></div>
