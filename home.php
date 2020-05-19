@@ -35,12 +35,24 @@
 							data: $('#form_tweet').serialize(),
 							success: function(data){
 								$('#texto_tweet').val('');
-								alert('Tweet enviado com sucesso');
+								atualizaTweet();
 							}
 						});
 
 					}
-				});	
+				});
+				
+				function atualizaTweet(){
+					//Função carregar os tweets a partir de requisição no script get_tweet
+
+					$.ajax({
+						url: 'get_tweet.php',
+						success: function(data){
+							$('#tweets').html(data);
+						}
+					});
+				}
+				atualizaTweet();
 			});
 
 		</script>
@@ -91,7 +103,7 @@
 				<div class="panel panel-default">
 					<div class="panel-boody">
 						<form id="form_tweet" class="input-group">
-							<input type="text" id="texto_tweet" class="form-control" name="texto_tweet" placeholder="O que está acontecendo agora?" maxlength="140">
+		   					<input type="text" id="texto_tweet" class="form-control" name="texto_tweet" placeholder="O que está acontecendo agora?" maxlength="140">
 							<span class="input-group-btn">
 								<button class="btn btn-default" id="btn_tweet" type="button">
 									Tweet
@@ -100,7 +112,12 @@
 						</form>
 					</div>
 				</div>
+
+				<div id="tweets" class="list-group">
+
+				</div>
             </div>
+			
 			<div class="col-md-3">
 				<div class="panel panel-default">
 					<div class="panel-body">

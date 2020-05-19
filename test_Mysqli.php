@@ -24,8 +24,7 @@
                 echo "ID = ",$usuario['id']," // ","Usuário = ", $usuario['usuario'] ," // E-mail = ", $usuario['email'];
                 echo '<br/><br/>';
             }
-    } 
-        else {
+    }else {
         echo 'Erro na execução da consulta, favor entrar em contato com o Admin do site';
     }
     
