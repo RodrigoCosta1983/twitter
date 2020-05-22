@@ -26,37 +26,48 @@
 
 			$(document).ready(function(){
 				// associar o evento de click ao botão
-				$('#btn_tweet').click(function(){	
-					if($('#texto_tweet').val().length > 0){	
+				$('#btn_procurar_pessoa').click(function(){	
+					if($('#nome_pessoa').val().length > 0){	
 						
 						$.ajax({
-							url: 'inclui_tweet.php',
+							url: 'get_pessoas.php',
 							method: 'post',
-							data: $('#form_tweet').serialize(),
+							data: $('#form_procurar_pessoa').serialize(),
 							success: function(data){
-								$('#texto_tweet').val('');
-								atualizaTweet();
+								$('#pessoas').html(data);
+
+								$('.btn_seguir').click(function(){
+									var id_usuario = $(this).data('id_usuario');
+									
+									$.ajax({
+										url: 'seguir.php',
+										method: 'post',
+										data: {seguir_id_usuario: id_usuario},
+										success: function(data){
+											alert('Registo efetuado com sucesso!');
+										}
+									})
+								});
+
+								
+								$('.btn_deixar_de_seguir').click(function(){
+									var id_usuario = $(this).data('id_usuario');
+									
+									$.ajax({
+										url: 'deixar_de_seguir.php',
+										method: 'post',
+										data: {deixar_seguir_id_usuario: id_usuario},
+										success: function(data){
+											alert('excluido com sucesso');
+										}
+									})
+								});
 							}
 						});
-
 					}
-				});
-				
-				function atualizaTweet(){
-					//Função carregar os tweets a partir de requisição no script get_tweet
-
-					$.ajax({
-						url: 'get_tweet.php',
-						success: function(data){
-							$('#tweets').html(data);
-						}
-					});
-				}
-				atualizaTweet();
+				});				
 			});
-
 		</script>
-
 	</head>
 
 	<body>
@@ -76,6 +87,7 @@
 	        
 	        <div id="navbar" class="navbar-collapse collapse">
 	          <ul class="nav navbar-nav navbar-right">
+	            <li><a href="home.php">Home</a></li>
 	            <li><a href="sair.php">Sair</a></li>
 	          </ul>
 	        </div><!--/.nav-collapse -->
@@ -102,18 +114,18 @@
 	    	<div class="col-md-6">
 				<div class="panel panel-default">
 					<div class="panel-body">
-						<form id="form_tweet" class="input-group">
-		   					<input type="text" id="texto_tweet" name="texto_tweet" class="form-control" placeholder="O que está acontecendo agora?" maxlength="140">
+						<form id="form_procurar_pessoa" class="input-group">
+		   					<input type="text" id="nome_pessoa" name="nome_pessoa" class="form-control" placeholder="Quem você quer procurar?" maxlength="140">
 							<span class="input-group-btn">
-								<button class="btn btn-default" id="btn_tweet" type="button">
-									Tweet
+								<button class="btn btn-default" id="btn_procurar_pessoa" type="button">
+									Procurar
 								</button>
 							</span>
 						</form>
 					</div>
 				</div>
 
-				<div id="tweets" class="list-group">
+				<div id="pessoas" class="list-group">
 
 				</div>
             </div>
@@ -121,7 +133,7 @@
 			<div class="col-md-3">
 				<div class="panel panel-default">
 					<div class="panel-body">
-						<h4><a href="procurar_pessoas.php">Procurar por pessoas</a></h4>
+				
 					</div>
 				</div>
 			</div>
