@@ -36,32 +36,36 @@
 							success: function(data){
 								$('#pessoas').html(data);
 
-								$('.btn_seguir').click(function(){
-									var id_usuario = $(this).data('id_usuario');
-									
-									$.ajax({
-										url: 'seguir.php',
-										method: 'post',
-										data: {seguir_id_usuario: id_usuario},
-										success: function(data){
-											alert('Registo efetuado com sucesso!');
-										}
-									})
-								});
+									$('.btn_seguir').click(function(){
+										var id_usuario = $(this).data('id_usuario');
 
-								
-								$('.btn_deixar_de_seguir').click(function(){
-									var id_usuario = $(this).data('id_usuario');
+										$('#btn_seguir_'+id_usuario).hide();
+										$('#btn_deixar_seguir_'+id_usuario).show();
+
+										$.ajax({
+											url: 'seguir.php',
+											method: 'post',
+											data: {seguir_id_usuario: id_usuario},
+											success: function(data){
+												alert('Registo efetuado com sucesso!');
+											}
+										})
+									});
 									
-									$.ajax({
-										url: 'deixar_de_seguir.php',
-										method: 'post',
-										data: {deixar_seguir_id_usuario: id_usuario},
-										success: function(data){
-											alert('excluido com sucesso');
-										}
-									})
-								});
+									$('.btn_deixar_de_seguir').click(function(){
+										var id_usuario = $(this).data('id_usuario');
+										$('#btn_seguir_'+id_usuario).show();
+										$('#btn_deixar_seguir_'+id_usuario).hide();
+										
+										$.ajax({
+											url: 'deixar_de_seguir.php',
+											method: 'post',
+											data: {deixar_seguir_id_usuario: id_usuario},
+											success: function(data){
+												alert('excluido com sucesso');
+											}
+										})
+									});
 							}
 						});
 					}
@@ -95,7 +99,6 @@
 	    </nav>
 
 
-	    <div class="container">
 	    	
 	    	<div class="col-md-3">
 				<div class="panel panel-default">
@@ -110,8 +113,8 @@
 						</div>
 					</div>
 				</div>
-			</div>
-	    	<div class="col-md-6">
+			 </div>
+	    	 <div class="col-md-6">
 				<div class="panel panel-default">
 					<div class="panel-body">
 						<form id="form_procurar_pessoa" class="input-group">
@@ -126,22 +129,23 @@
 				</div>
 
 				<div id="pessoas" class="list-group">
+	    	 <div class="container">
+			  </div>
+             </div>
+ 			 </div>
 
-				</div>
-            </div>
-			
-			<div class="col-md-3">
+			 <div class="col-md-3">
 				<div class="panel panel-default">
 					<div class="panel-body">
 				
 					</div>
 				</div>
-			</div>
+			 </div>
 			
-		</div>
+		 
 
 
-	    </div>
+	     </div>
 	
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	
