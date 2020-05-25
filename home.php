@@ -4,8 +4,41 @@
 
     if (!isset($_SESSION['usuario'])) {
         header('location: index.php?erro=1');
-    }
-
+	}
+	
+	  //Classe de conexão com o bd
+	  require_once('db.class.php');
+	  
+	  //instância da classe
+	  $objDb = new db();
+	  $link = $objDb->conecta_mysql();
+	  
+	  $id_usuario = $_SESSION['id_usuario'];
+   
+		//Quantidades de TWEETs
+	  $sql ="SELECT COUNT(*) AS qtde_tweets FROM tweet WHERE id_usuario = $id_usuario "  ;
+	  $qtde_tweets = 0;	
+	  //executa a query de conexão com bd
+	  $resultado_id = mysqli_query($link, $sql);
+	  if($resultado_id){
+		$registro = mysqli_fetch_array($resultado_id, MYSQLI_ASSOC);
+		$qtde_tweets = $registro['qtde_tweets'];
+	  }else{
+		  echo 'Erro na query';
+		}
+  
+		//Quantidades de Seguidores
+	  $sql ="SELECT COUNT(*) AS qtde_seguidores FROM usuarios_seguidores WHERE seguindo_id_usuario = $id_usuario "  ;
+	  $qtde_seguidores = 0;	
+	  //executa a query de conexão com bd
+	  $resultado_id = mysqli_query($link, $sql);
+	  if($resultado_id){
+		$registro = mysqli_fetch_array($resultado_id, MYSQLI_ASSOC);
+		$qtde_seguidores = $registro['qtde_seguidores'];
+	  }else{
+		  echo 'Erro na query';
+		}
+  
 ?>
 
 
@@ -91,10 +124,10 @@
 						<h4><?= $_SESSION['usuario']; ?></h4>
 						<hr>
 						<div class="col-md-6">
-							Twitter <br> 1
+							Twitter <br> <?= $qtde_tweets ?>
 						</div>
 						<div class="col-md-6">
-							Seguidores <br> 1
+							Seguidores <br> <?= $qtde_seguidores ?>
 						</div>
 					</div>
 				</div>

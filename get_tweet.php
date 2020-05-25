@@ -16,7 +16,15 @@ if (!isset($_SESSION['usuario'])) {
   $link = $objDb->conecta_mysql();
 
   //Insert no bd, criando a variável SQL --- query de Insert
-  $sql = " SELECT date_format(tweet.data_inclusao, '%d %b %Y %T') as data_hora, usuarios.usuario, tweet.tweet FROM tweet left outer join usuarios on usuarios.id = tweet.id_usuario where id_usuario = $id_usuario ORDER BY tweet.data_inclusao DESC ";
+  $sql = " SELECT date_format(tweet.data_inclusao, '%d %b %Y %T') as data_hora, usuarios.usuario, tweet.tweet 
+  FROM tweet 
+  join usuarios 
+  on  (tweet.id_usuario = usuarios.id)
+  WHERE id_usuario = $id_usuario 
+  OR id_usuario IN (select seguindo_id_usuario from usuarios_seguidores where id_usuario = $id_usuario)
+  ORDER BY data_hora DESC";
+
+
 
   //executa a query de conexão com bd
   $resultado_id = mysqli_query($link, $sql);

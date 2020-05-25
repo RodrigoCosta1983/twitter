@@ -32,6 +32,7 @@ if (!isset($_SESSION['usuario'])) {
 
   //$sql = " SELECT * from usuarios where usuario like '%$nome_pessoa%' and id <> '$id_usuario' ";
 
+  
 
   //executa a query de conexão com bd
   $resultado_id = mysqli_query($link, $sql);
@@ -41,8 +42,8 @@ if (!isset($_SESSION['usuario'])) {
 		while($registro = mysqli_fetch_array($resultado_id, MYSQLI_ASSOC)){
 			echo '<a href="#" class="list-group-item">';
 				echo '<strong>'.$registro['usuario'].'</strong> <small> - '.$registro['email'].'</small>';
-				echo '<p class="list-group-item-text pull-right">';
-
+        echo '<p class="list-group-item-text pull-right">';
+        
 					$esta_seguindo_usuario_sn = isset($registro['id_usuario_seguidor']) && !empty($registro['id_usuario_seguidor']) ? 'S' : 'N';
 
 					$btn_seguir_display = 'block';
