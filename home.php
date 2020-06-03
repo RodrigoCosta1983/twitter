@@ -52,9 +52,10 @@
 		
 		<!-- jquery - link cdn -->
 		<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+
 		<!-- bootstrap - link cdn -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-		
+	
 		<script type="text/javascript">
 
 			$(document).ready(function(){
@@ -82,12 +83,27 @@
 						url: 'get_tweet.php',
 						success: function(data){
 							$('#tweets').html(data);
+							
+							//Botão Delete Tweet
+							$('.btn_delete').click(function(){	
+								var del_tweet = $(this).data('del_usuario');
+								
+								$.ajax({
+									url: 'delete_tweet.php',
+									method: 'post',
+									data: { delete_tweet_usuario: del_tweet},
+									success: function(data){
+										//alert(data);
+										atualizaTweet();
+									}
+								})
+							});
 						}
 					});
 				}
 				atualizaTweet();
+				
 			});
-
 		</script>
 
 	</head>
