@@ -35,7 +35,7 @@ if (!isset($_SESSION['usuario'])) {
         
       while($registro = mysqli_fetch_array($resultado_id, MYSQLI_ASSOC)){
         echo '<a href="#" class="list-group-item"';
-          echo '<h4 class="list-group-item-heading">'.ucfirst($registro['usuario']).' <small> - '.$registro['data_hora'].'</small></h4>';
+          echo '<h4 class="list-group-item-heading"><b>'.ucfirst($registro['usuario']).'</b> <small> - '.$registro['data_hora'].'</small></h4>';
           echo '<p class="list-group-item-text">'.$registro['tweet'].'</p>';
               echo '<p class="list-group-item-text pull-right">';
                 if($id_usuario == $registro['iduser']){
@@ -48,8 +48,8 @@ if (!isset($_SESSION['usuario'])) {
     }else{
         echo 'Erro na consulta de tweets no Banco de dados';
       }
-
-
+      
+      
 ?>
 
 

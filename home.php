@@ -38,7 +38,7 @@
 	  }else{
 		  echo 'Erro na query';
 		}
-  
+
 ?>
 
 
@@ -119,11 +119,12 @@
 	            <span class="icon-bar"></span>
 	            <span class="icon-bar"></span>
 	            <span class="icon-bar"></span>
-	          </button>
-	          <img src="imagens/icone_twitter.png" />
+			  </button>
+			  
+			  <a href="home.php"><img src="imagens/icone_twitter.png" ></a>
 	        </div>
-	        
-	        <div id="navbar" class="navbar-collapse collapse">
+			
+			<div id="navbar" class="navbar-collapse collapse">
 	          <ul class="nav navbar-nav navbar-right">
 	            <li><a href="sair.php">Sair</a></li>
 	          </ul>
@@ -139,7 +140,7 @@
 					<div class="panel-body">
 						<h4><?= $_SESSION['usuario']; ?></h4>
 						<hr>
-						<div class="col-md-6">
+						<div class="col-md-6 qtde_tweets" id="qtde_tweets">
 							Twitter <br> <?= $qtde_tweets ?>
 						</div>
 						<div class="col-md-6">
