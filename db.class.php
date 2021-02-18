@@ -4,6 +4,7 @@ class db{
 
     //Qual o Host
     private $host = 'localhost';
+    
 
     //Qual o Usuário
     private $usuario = 'root';
