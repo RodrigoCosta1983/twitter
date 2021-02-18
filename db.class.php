@@ -4,7 +4,7 @@ class db{
 
     //Qual o Host
     private $host = 'localhost';
-    
+
 
     //Qual o Usuário
     private $usuario = 'root';
@@ -17,7 +17,7 @@ class db{
 
     public function conecta_mysql(){
 
-        //criar a conexao -> localizaçao do Bd, usuario de acesso, senha, banco de dados
+        //criar a conexao -> localizaçao do Bd, usuario de acesso, senha, banco de dados.
         $con = mysqli_connect($this->host, $this->usuario, $this->senha, $this->database);
 
         mysqli_set_charset($con, 'Utf8');
